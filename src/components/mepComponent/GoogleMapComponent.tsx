@@ -35,7 +35,6 @@ const GoogleMapComponent: React.FC<GoogleMapComponentProps> = ({ attack }) => {
       const newMarkers = attack.map((attack: any) => {
         const lat = attack.latitude;
         const lng = attack.longitude;
-        console.log("attack loc", lat, lng);
         return { lat, lng };
       });
 
