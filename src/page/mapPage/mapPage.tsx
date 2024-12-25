@@ -43,7 +43,6 @@ const MapPage = () => {
     };
     fetchData();
   }, [dispatch, origen, groupName, origenName]);
-  console.log(attack);
   return (
     <Box sx={{ width: "100%", height: "100%" }}>
       <SearchBar

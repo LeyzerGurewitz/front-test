@@ -89,7 +89,6 @@ export const fetchTopGroups = createAsyncThunk(
       const response = await axios.get(
         `${BASE_URL}top-groups?region=${region}&filter=all`
       );
-      console.log("response", response.data.data);
       return response.data.data;
     } catch (error: any) {
       return thunkAPI.rejectWithValue(
