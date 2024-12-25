@@ -1,5 +1,4 @@
 import { Box } from "@mui/material";
-import React from "react";
 import IncidentTrends from "../../components/statisticsComponents/IncidentTrends";
 
 export const IncidentTrendsPage = () => {
