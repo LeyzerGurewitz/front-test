@@ -79,9 +79,7 @@ const IncidentTrends = () => {
         disablePortal
         options={
           startYear
-            ? Array.from({ length: 2018 - startYear }, (_, i) =>
-                (startYear + i).toString()
-              )
+            ? years.filter((year) => +year > startYear)
             : []
         }
         sx={{ width: 150 }}

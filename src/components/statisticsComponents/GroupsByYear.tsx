@@ -18,7 +18,7 @@ const GroupsByYear = () => {
       if (byYear) {
         const data = await dispatch(fetchGroupIncidentsByYear(byYear));
         setDataGroupByYear(data.payload);
-        dataGroupByYear.forEach((group) => console.log(group));
+        setByYear(0);
       }
     };
 

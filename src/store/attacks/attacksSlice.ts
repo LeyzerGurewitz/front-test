@@ -87,7 +87,7 @@ export const fetchTopGroups = createAsyncThunk(
   async (region: string, thunkAPI) => {
     try {
       const response = await axios.get(
-        `${BASE_URL}top-groups?region=${region}&filter=all`
+        `${BASE_URL}top-groups?region=${region}&filter=top5`
       );
       return response.data.data;
     } catch (error: any) {
