@@ -9,7 +9,7 @@ import { GroupIncident } from "../../types/attackType";
 
 const GroupsByYear = () => {
   const dispatch = useDispatch<AppDispatch>();
-  const [byYear, setByYear] = useState<number>(2017);
+  const [byYear, setByYear] = useState<number>(0);
   const [dataGroupByYear, setDataGroupByYear] = useState<GroupIncident[]>([]);
 
  

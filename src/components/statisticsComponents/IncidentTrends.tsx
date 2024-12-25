@@ -1,4 +1,4 @@
-import  { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { AppDispatch } from "../../store/store";
 import { useDispatch } from "react-redux";
 import {
@@ -20,6 +20,8 @@ const IncidentTrends = () => {
   const [endYear, setEndYear] = useState(0);
   const [dataYears, setDataYear] = useState<IncidentTrend[]>([]);
   const [graph, setGraph] = useState<boolean>(false);
+  const [groupBy, setGroupBy] = useState<boolean>(false);
+  const [endYears, setEndYears] = useState<string[]>([]);
 
   const groupByYear = (data: any[]) => {
     return data.reduce((acc, item) => {
@@ -39,12 +41,18 @@ const IncidentTrends = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      if (startYear && endYear) {
+      if (startYear && endYear && graph) {
         const data = await dispatch(
           fetchIncidentTrends({ startYear, endYear })
         );
         setDataYear(data.payload);
-        setGraph(data.payload.length > 0);
+        setGroupBy(true);
+        setGraph(false);
+      }
+
+      if (startYear) {
+        const endYears = years.filter((year) => +year > startYear);
+        setEndYears(endYears);
       }
     };
 
@@ -55,8 +63,6 @@ const IncidentTrends = () => {
   const groupedData = isYearGrouping
     ? groupByYear(dataYears)
     : groupByMonth(dataYears);
-
- 
 
   return (
     <Box
@@ -72,18 +78,14 @@ const IncidentTrends = () => {
         disablePortal
         options={years}
         sx={{ width: 150 }}
-        onChange={( value) => setStartYear(Number(value) || 0)}
+        onChange={(value) => setStartYear(Number(value))}
         renderInput={(params) => <TextField {...params} label="Start Year" />}
       />
       <Autocomplete
         disablePortal
-        options={
-          startYear
-            ? years.filter((year) => +year > startYear)
-            : []
-        }
+        options={endYears ? endYears : []}
         sx={{ width: 150 }}
-        onChange={( value) => setEndYear(Number(value) || 0)}
+        onChange={(value) => setEndYear(Number(value))}
         renderInput={(params) => <TextField {...params} label="End Year" />}
       />
       <Button
@@ -125,7 +127,7 @@ const IncidentTrends = () => {
         </Button>
       </ButtonGroup>
 
-      {graph && (
+      {groupBy && (
         <Box sx={{ width: "88%", marginTop: "1rem", height: "400px" }}>
           <BarChart
             width={500}
