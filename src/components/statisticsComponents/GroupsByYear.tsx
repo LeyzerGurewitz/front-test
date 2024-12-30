@@ -45,7 +45,7 @@ const GroupsByYear = () => {
         options={years}
         sx={{ width: 150 }}
         onChange={
-          ( value) => setByYear(Number(value) || 0) 
+          ( value) => setByYear(Number(value)) 
         }
         renderInput={(params) => (
           <TextField {...params} label="Search by Year" />
